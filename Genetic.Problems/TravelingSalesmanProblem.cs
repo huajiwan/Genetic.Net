@@ -13,8 +13,9 @@ namespace Genetic.Problems
     * Mutation rate should be 2% and single-cut crossing should be applied.
     * For selection I would like to use 'roulete wheel' strategy.
     * I would like population to be not bigger than 50 chromosomes per step.
+    * I would like to have 10 simultaneous population running, with a migration rate of 1 chromosomes happening witch 5% chance.
     * 
-    * It is expected that algorithm will be able to find as good or better solution than the greedy algorithm.
+    * It is expected that algorithm will be able to find better solution than the greedy algorithm.
     * Timeouts after 100 steps.
     */
     [TestClass]
