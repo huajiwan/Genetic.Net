@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Genetic
 {
-    public interface IPopulation<T> : IList<T>
-        where T : IChromosome
+    public interface IPopulation
     {
         void Breed();
     }

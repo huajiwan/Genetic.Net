@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Genetic
 {
-    public interface ICrossoverStrategy<T>
-        where T : IChromosome
+    public interface ICrossoverStrategy
     {
-        List<T> Cross(T chromosomeA, T chromosomeB);
+        List<IChromosome> Cross(IChromosome chromosomeA, IChromosome chromosomeB);
     }
 }

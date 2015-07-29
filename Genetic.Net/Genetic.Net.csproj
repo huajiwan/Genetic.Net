@@ -39,6 +39,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Chromosomes\GenePool.cs" />
+    <Compile Include="Chromosomes\SequentialChromosome.cs" />
+    <Compile Include="CrossoverStrategies\SingleCut.cs" />
+    <Compile Include="FitnessCalculators\StringComparer.cs" />
+    <Compile Include="IChromosomeFactory.cs" />
+    <Compile Include="IPopulationStrategy.cs" />
+    <Compile Include="ISequentialChromosome.cs" />
+    <Compile Include="Chromosomes\SequentialChromosomeFactory.cs" />
+    <Compile Include="CrossoverStrategies\DoubleCut.cs" />
     <Compile Include="Evolution.cs" />
     <Compile Include="IChromosome.cs" />
     <Compile Include="ICrossoverStrategy.cs" />
@@ -47,7 +56,12 @@
     <Compile Include="IPopulation.cs" />
     <Compile Include="IRandomNumberGenerator.cs" />
     <Compile Include="ISelectionStrategy.cs" />
+    <Compile Include="MutationStrategies\SingleGeneMutation.cs" />
+    <Compile Include="PopulationStrategies\SinglePopulation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandomNumberGenerators\Default.cs" />
+    <Compile Include="SelectionStrategies\KeepFittest.cs" />
+    <Compile Include="SelectionStrategies\Tournament.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

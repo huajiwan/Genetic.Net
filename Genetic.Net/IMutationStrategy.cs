@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Genetic
 {
-    public interface IMutationStrategy<T>
-        where T : IChromosome
+    public interface IMutationStrategy
     {
-        T Mutate(T chromosome);
+        IChromosome Mutate(IChromosome chromosome);
     }
 }

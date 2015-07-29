@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace Genetic
 {
-    public interface IFitnessCalculator<T>
-        where T : IChromosome
+    public interface IPopulationStrategy
     {
-        double Calculate(T chromosome);
     }
 }

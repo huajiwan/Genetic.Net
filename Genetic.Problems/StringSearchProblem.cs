@@ -1,4 +1,5 @@
 ﻿using System;
+using Genetic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Genetic.Problems
@@ -26,17 +27,17 @@ namespace Genetic.Problems
             string passphrase = "GenticAlgorithmsWorks!";
             var random = new RandomNumberGenerators.Default();
 
-            var genePool = GenePool<char>();
+            var genePool = new Chromosomes.GenePool<char>();
             genePool.AddRange("abcdefghijklmnopqrstuvwxyz".ToCharArray());
             genePool.AddRange("ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray());
             genePool.Add('!');
                         
-            var chromosomeFactory = Chromosomes.SequentialChromosomeFactory<char>(random, genePool, passphrase.Length); // chromosome as fixed lenght sequence with array of allowed characters
+            var chromosomeFactory = new Chromosomes.SequentialChromosomeFactory<char>(random, genePool, passphrase.Length); // chromosome as fixed lenght sequence with array of allowed characters
             var fitnessCalc = new FitnessCalculators.StringComparer(passphrase);
-            var mutationStrategy = MutationStrategies.SingleGeneMutation(random, 0.01); // mutation rate fixed to 1%
-            var crossoverStrategy = CrossoverStrategies.SingleCut(random);
-            var selectionStrategy = SelectionStrategies.KeepFittest();
-            var populationStrategy = PopulationStrategies.SinglePopulation(100); // size fixed to 100
+            var mutationStrategy = new MutationStrategies.SingleGeneMutation(random, 0.01); // mutation rate fixed to 1%
+            var crossoverStrategy = new CrossoverStrategies.SingleCut(random);
+            var selectionStrategy = new SelectionStrategies.KeepFittest();
+            var populationStrategy = new PopulationStrategies.SinglePopulation(100); // size fixed to 100
 
             var evolution = new Evolution(random, 
                 chromosomeFactory,

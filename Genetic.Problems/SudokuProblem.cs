@@ -1,4 +1,5 @@
 ﻿using System;
+using Genetic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Genetic.Problems
@@ -26,15 +27,15 @@ namespace Genetic.Problems
         {
             var random = new RandomNumberGenerators.Default();
 
-            var genePool = GenePool<int>();
+            var genePool = new Chromosomes.GenePool<int>();
             genePool.AddRange(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 });
 
-            var chromosomeFactory = Chromosomes.SequentialChromosomeFactory<int>(random, genePool, 81); // chromosome as a sequence with 81 1-9 numbers
+            var chromosomeFactory = new Chromosomes.SequentialChromosomeFactory<int>(random, genePool, 81); // chromosome as a sequence with 81 1-9 numbers
             var fitnessCalc = new SudokuFitnessCalculator();
-            var mutationStrategy = MutationStrategies.SingleGeneMutation(random, 0.005); // mutation rate fixed to 0.5%
-            var crossoverStrategy = CrossoverStrategies.DoubleCut(random);
-            var selectionStrategy = SelectionStrategies.Tournament();
-            var populationStrategy = PopulationStrategies.SinglePopulation(250); // size fixed to 250
+            var mutationStrategy = new MutationStrategies.SingleGeneMutation(random, 0.005); // mutation rate fixed to 0.5%
+            var crossoverStrategy = new CrossoverStrategies.DoubleCut(random);
+            var selectionStrategy = new SelectionStrategies.Tournament();
+            var populationStrategy = new PopulationStrategies.SinglePopulation(250); // size fixed to 250
 
             var evolution = new Evolution(random,
                 chromosomeFactory,
@@ -72,7 +73,7 @@ namespace Genetic.Problems
                 9,8,1,   3,4,5,   2,7,6,
                 3,7,4,   9,6,2,   8,1,5
             };
-            var chromosome = Chromosomes.SequentialChromosome<int>(solvedSudokuNumbers);
+            var chromosome = new Chromosomes.SequentialChromosome<int>(solvedSudokuNumbers);
             Assert.AreEqual(1.0, calculator.Calculate(chromosome));
         }
 
@@ -93,12 +94,12 @@ namespace Genetic.Problems
                 1,1,1,   1,1,1,   1,1,1,
                 1,1,1,   1,1,1,   1,1,1
             };
-            var chromosome = Chromosomes.SequentialChromosome<int>(unsolvedSudokuNumbers);
+            var chromosome = new Chromosomes.SequentialChromosome<int>(unsolvedSudokuNumbers);
             Assert.AreEqual(0.0, calculator.Calculate(chromosome));
         }
     }
 
-    private class SudokuFitnessCalculator : IFitnessCalculator<ISequentialChromosome<int>>
+    class SudokuFitnessCalculator : IFitnessCalculator<ISequentialChromosome<int>>
     {
         public double Calculate(ISequentialChromosome<int> chromosome)
         {

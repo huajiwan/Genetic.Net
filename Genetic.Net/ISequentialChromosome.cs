@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Genetic
 {
-    public interface IFitnessCalculator<T>
-        where T : IChromosome
+    public interface ISequentialChromosome<T> : IChromosome
     {
-        double Calculate(T chromosome);
+        int Length { get; set; }
+        T this[int index] { get; set; }
     }
 }
