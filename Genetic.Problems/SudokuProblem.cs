@@ -99,9 +99,9 @@ namespace Genetic.Problems
         }
     }
 
-    class SudokuFitnessCalculator : IFitnessCalculator<ISequentialChromosome<int>>
+    class SudokuFitnessCalculator : IFitnessCalculator<Chromosomes.ISequentialChromosome<int>>
     {
-        public double Calculate(ISequentialChromosome<int> chromosome)
+        public double Calculate(Chromosomes.ISequentialChromosome<int> chromosome)
         {
             if (chromosome.Length != 81)
             {
