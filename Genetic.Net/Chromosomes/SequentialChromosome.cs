@@ -8,16 +8,22 @@ namespace Genetic.Chromosomes
 {
     public class SequentialChromosome<T> : ISequentialChromosome<T>
     {
-        public SequentialChromosome(IEnumerable<T> initializingSet)
+        private List<T> genes;
+        public SequentialChromosome(IEnumerable<T> genes)
         {
+            if (genes == null)
+            {
+                throw new ArgumentNullException("genes");
+            }
 
+            this.genes = new List<T>(genes);
         }
 
         public int Length
         {
             get
             {
-                throw new NotImplementedException();
+                return this.genes.Count;
             }
         }
 
@@ -25,7 +31,7 @@ namespace Genetic.Chromosomes
         {
             get
             {
-                throw new NotImplementedException();
+                return this.genes[index];
             }
         }
     }

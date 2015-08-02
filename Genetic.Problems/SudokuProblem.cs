@@ -128,14 +128,9 @@ namespace Genetic.Problems
             int square = 0;
             for (int i = 0; i < chromosome.Length; i++)
             {
-                column++;
-                if (column >= 9)
-                {
-                    column = 0;
-                    row++;
-                }
-
-                square = 3 * row % 3 + column % 3;
+                column = i / 9;
+                row = i % 9;
+                square = 3 * (row / 3) + column / 3;
                 
                 rowSum[row] += chromosome[i];
                 columnSum[row] += chromosome[i];
@@ -143,6 +138,7 @@ namespace Genetic.Problems
                 rowMul[row] *= chromosome[i];
                 columnMul[row] *= chromosome[i];
                 squareMul[square] *= chromosome[i];
+                column++;
             }
 
             int score = 0;
