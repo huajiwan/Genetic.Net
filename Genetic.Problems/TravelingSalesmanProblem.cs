@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
@@ -51,6 +52,8 @@ namespace Genetic.Problems
             var migrationStrategy = new MigrationStrategies.Random(random, 0.05); // random migration with chance of occurence 5%
             var populationStrategy = new PopulationStrategies.MultiPopulation(10, 50, migrationStrategy); // 10 population with fixed size of 50
 
+            // need to pass something telling that fitness is a total distance so the shortest the better
+
             var evolution = new Evolution(random,
                 chromosomeFactory,
                 populationStrategy,
@@ -69,6 +72,21 @@ namespace Genetic.Problems
             while (evolution.Generation < 1000);
             Assert.Fail();
         }
+
+        [TestMethod]
+        public void ValiadateTravelingSalesmanProblemFitnessCalculator_WithKnownDistance()
+        {
+            var cities = new List<Location>() {
+                new Location('A', 0, 0),
+                new Location('B', 0, 10),
+                new Location('C', 10, 10),
+                new Location('D', 10, 0)
+            };
+
+            var calculator = new TravelingSalesmanProblemFitnessCalculator(cities);
+            var distance = calculator.Calculate(new Chromosomes.PermutationChromosome<char>("ABCD".ToCharArray()));
+            Assert.AreEqual(40, distance);
+        }
     }
 
     class Location
@@ -83,7 +101,7 @@ namespace Genetic.Problems
         public char Id { get; set; }
         public double X { get; set; }
         public double Y { get; set; }
-    }
+    }    
 
     class TravelingSalesmanProblemFitnessCalculator : IFitnessCalculator<Chromosomes.IPermutationChromosome<char>>
     {
@@ -101,9 +119,32 @@ namespace Genetic.Problems
                 throw new ArgumentOutOfRangeException("chromosome");
             }
 
-            // calc euclid distance across all cities on route, order defined by chromosome
+            double totalDistance = 0;
+            for (int i = 0; i < chromosome.Length; i++)
+            {
+                if(i + 1 < chromosome.Length)
+                {
+                    totalDistance += this.CalcDistance(chromosome[i], chromosome[i+1]);
+                }
+                else
+                {
+                    totalDistance += this.CalcDistance(chromosome[i], chromosome[0]);
+                }
+            }
 
-            return 0;
+            return totalDistance;
+        }
+
+        private double CalcDistance(char aId, char bId)
+        {
+            return this.CalcDistance(
+                this.citiesCoordinates.FirstOrDefault(x => x.Id == aId),
+                this.citiesCoordinates.FirstOrDefault(x => x.Id == bId));
+        }
+
+        private double CalcDistance(Location a, Location b)
+        {
+            return Math.Sqrt(Math.Pow(a.X - b.X, 2) + Math.Pow(a.Y - b.Y, 2));
         }
     }
 }

@@ -19,19 +19,11 @@ namespace Genetic.Chromosomes
             {
                 throw new NotImplementedException();
             }
-            set
-            {
-                throw new NotImplementedException();
-            }
         }
 
         public T this[int index]
         {
             get
-            {
-                throw new NotImplementedException();
-            }
-            set
             {
                 throw new NotImplementedException();
             }

@@ -8,7 +8,7 @@ namespace Genetic.Chromosomes
 {
     public interface IPermutationChromosome<T> : IChromosome
     {
-        int Length { get; set; }
-        T this[int index] { get; set; }
+        int Length { get; }
+        T this[int index] { get; }
     }
 }
