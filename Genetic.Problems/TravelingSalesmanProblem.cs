@@ -87,6 +87,18 @@ namespace Genetic.Problems
             var distance = calculator.Calculate(new Chromosomes.PermutationChromosome<char>("ABCD".ToCharArray()));
             Assert.AreEqual(40, distance);
         }
+
+        [TestMethod]
+        public void ValiadateTravelingSalesmanProblemFitnessCalculator_ComparerCheck()
+        {
+            var calculator = new TravelingSalesmanProblemFitnessCalculator(new List<Location>());
+            var compResult = calculator.Compare(1000, 2000);
+            Assert.AreEqual(1000.0, compResult.FitnessA);
+            Assert.AreEqual(2000.0, compResult.FitnessB);
+            Assert.IsTrue(compResult.IsAFitter);
+            Assert.IsFalse(compResult.IsBFitter);
+            Assert.IsFalse(compResult.AreEqual);
+        }
     }
 
     class Location
@@ -133,6 +145,16 @@ namespace Genetic.Problems
             }
 
             return totalDistance;
+        }
+
+        public FitnessComparisonResult Compare(double fitnessA, double fitnessB)
+        {
+            return new FitnessComparisonResult(
+                fitnessA,
+                fitnessB,
+                fitnessA < fitnessB,
+                fitnessB < fitnessA,
+                fitnessA == fitnessB);
         }
 
         private double CalcDistance(char aId, char bId)

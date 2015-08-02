@@ -46,6 +46,7 @@
     <Compile Include="Chromosomes\SequentialChromosome.cs" />
     <Compile Include="CrossoverStrategies\SingleCut.cs" />
     <Compile Include="FitnessCalculators\StringComparer.cs" />
+    <Compile Include="FitnessComparisonResult.cs" />
     <Compile Include="IChromosomeFactory.cs" />
     <Compile Include="IMigrationStrategy.cs" />
     <Compile Include="IPopulationStrategy.cs" />

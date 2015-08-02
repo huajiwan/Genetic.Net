@@ -97,6 +97,18 @@ namespace Genetic.Problems
             var chromosome = new Chromosomes.SequentialChromosome<int>(unsolvedSudokuNumbers);
             Assert.AreEqual(0.0, calculator.Calculate(chromosome));
         }
+
+        [TestMethod]
+        public void ValiadateSudokuFitnessCalculator_ComparerCheck()
+        {
+            SudokuFitnessCalculator calculator = new SudokuFitnessCalculator();
+            var compResult = calculator.Compare(0.75, 0.5);
+            Assert.AreEqual(0.75, compResult.FitnessA);
+            Assert.AreEqual(0.5, compResult.FitnessB);
+            Assert.IsTrue(compResult.IsAFitter);
+            Assert.IsFalse(compResult.IsBFitter);
+            Assert.IsFalse(compResult.AreEqual);
+        }
     }
 
     class SudokuFitnessCalculator : IFitnessCalculator<Chromosomes.ISequentialChromosome<int>>
@@ -162,6 +174,16 @@ namespace Genetic.Problems
                     score++;
             double maxScore = 2 * (9 + 9 + 9);
             return score / maxScore;
+        }
+
+        public FitnessComparisonResult Compare(double fitnessA, double fitnessB)
+        {
+            return new FitnessComparisonResult(
+                fitnessA,
+                fitnessB,
+                fitnessA > fitnessB,
+                fitnessB > fitnessA,
+                fitnessA == fitnessB);
         }
     }
 }

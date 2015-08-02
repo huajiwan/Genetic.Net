@@ -10,5 +10,6 @@ namespace Genetic
         where T : IChromosome
     {
         double Calculate(T chromosome);
+        FitnessComparisonResult Compare(double fitnessA, double fitnessB);
     }
 }
