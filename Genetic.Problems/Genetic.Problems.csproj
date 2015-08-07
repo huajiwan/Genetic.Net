@@ -6,8 +6,8 @@
     <ProjectGuid>{FA3C3572-1E5B-40B5-962D-D8A56DF0A5BC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UnitTestProject2</RootNamespace>
-    <AssemblyName>UnitTestProject2</AssemblyName>
+    <RootNamespace>Genetic.Problems</RootNamespace>
+    <AssemblyName>Genetic.Problems</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -51,11 +51,15 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CurveMatchProblem.cs" />
-    <Compile Include="PermutationChromosome.cs" />
+    <Compile Include="SudokuFitnessCalculator.cs" />
+    <Compile Include="SudokuFitnessCalculatorTests.cs" />
+    <Compile Include="TravelingSalesmanCity.cs" />
     <Compile Include="StringSearchProblem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TravelingSalesmanProblemFitnessCalculatorTests.cs" />
     <Compile Include="TravelingSalesmanProblem.cs" />
     <Compile Include="SudokuProblem.cs" />
+    <Compile Include="TravelingSalesmanProblemFitnessCalculator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Genetic.Net\Genetic.Net.csproj">

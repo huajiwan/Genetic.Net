@@ -26,17 +26,17 @@ namespace Genetic.Problems
         [TestMethod]
         public void SolveTravelingSalesmanProblem()
         {
-            var citiesCoordinates = new List<Location>()
+            var citiesCoordinates = new List<TravelingSalesmanCity>()
             {
-                new Location('A', 0, 0),
-                new Location('B', 10, 100),
-                new Location('C', 20, 20),
-                new Location('D', 60, 20),
-                new Location('E', 30, 10),
-                new Location('F', 50, 70),
-                new Location('G', 70, 30),
-                new Location('H', 30, 30),
-                new Location('I', 50, 80)
+                new TravelingSalesmanCity('A', 0, 0),
+                new TravelingSalesmanCity('B', 10, 100),
+                new TravelingSalesmanCity('C', 20, 20),
+                new TravelingSalesmanCity('D', 60, 20),
+                new TravelingSalesmanCity('E', 30, 10),
+                new TravelingSalesmanCity('F', 50, 70),
+                new TravelingSalesmanCity('G', 70, 30),
+                new TravelingSalesmanCity('H', 30, 30),
+                new TravelingSalesmanCity('I', 50, 80)
             };
 
             var random = new RandomNumberGenerators.Default();
@@ -71,102 +71,6 @@ namespace Genetic.Problems
             }
             while (evolution.Generation < 1000);
             Assert.Fail();
-        }
-
-        [TestMethod]
-        public void ValiadateTravelingSalesmanProblemFitnessCalculator_WithKnownDistance()
-        {
-            var cities = new List<Location>() {
-                new Location('A', 0, 0),
-                new Location('B', 0, 10),
-                new Location('C', 10, 10),
-                new Location('D', 10, 0)
-            };
-
-            var calculator = new TravelingSalesmanProblemFitnessCalculator(cities);
-            var distance = calculator.Calculate(new Chromosomes.PermutationChromosome<char>("ABCD".ToCharArray()));
-            Assert.AreEqual(40, distance);
-        }
-
-        [TestMethod]
-        public void ValiadateTravelingSalesmanProblemFitnessCalculator_ComparerCheck()
-        {
-            var calculator = new TravelingSalesmanProblemFitnessCalculator(new List<Location>());
-            var compResult = calculator.Compare(1000, 2000);
-            Assert.AreEqual(1000.0, compResult.FitnessA);
-            Assert.AreEqual(2000.0, compResult.FitnessB);
-            Assert.IsTrue(compResult.IsAFitter);
-            Assert.IsFalse(compResult.IsBFitter);
-            Assert.IsFalse(compResult.AreEqual);
-        }
-    }
-
-    class Location
-    {
-        public Location(char id, double x, double y)
-        {
-            this.Id = id;
-            this.X = x;
-            this.Y = y;
-        }
-
-        public char Id { get; set; }
-        public double X { get; set; }
-        public double Y { get; set; }
-    }    
-
-    class TravelingSalesmanProblemFitnessCalculator : IFitnessCalculator<Chromosomes.IPermutationChromosome<char>>
-    {
-        private List<Location> citiesCoordinates;
-
-        public TravelingSalesmanProblemFitnessCalculator(IEnumerable<Location> citiesCoordinates)
-        {
-            this.citiesCoordinates = new List<Location>(citiesCoordinates);
-        }
-
-        public double Calculate(Chromosomes.IPermutationChromosome<char> chromosome)
-        {
-            if(chromosome.Length != citiesCoordinates.Count)
-            {
-                throw new ArgumentOutOfRangeException("chromosome");
-            }
-
-            double totalDistance = 0;
-            for (int i = 0; i < chromosome.Length; i++)
-            {
-                if(i + 1 < chromosome.Length)
-                {
-                    totalDistance += this.CalcDistance(chromosome[i], chromosome[i+1]);
-                }
-                else
-                {
-                    totalDistance += this.CalcDistance(chromosome[i], chromosome[0]);
-                }
-            }
-
-            return totalDistance;
-        }
-
-        public FitnessComparisonResult Compare(double fitnessA, double fitnessB)
-        {
-            return new FitnessComparisonResult(
-                fitnessA,
-                fitnessB,
-                fitnessA < fitnessB,
-                fitnessB < fitnessA,
-                fitnessA == fitnessB);
-        }
-
-        private double CalcDistance(char aId, char bId)
-        {
-            return this.CalcDistance(
-                this.citiesCoordinates.FirstOrDefault(x => x.Id == aId),
-                this.citiesCoordinates.FirstOrDefault(x => x.Id == bId));
-        }
-
-        private double CalcDistance(Location a, Location b)
-        {
-            return Math.Sqrt(Math.Pow(a.X - b.X, 2) + Math.Pow(a.Y - b.Y, 2));
-        }
+        }        
     }
 }

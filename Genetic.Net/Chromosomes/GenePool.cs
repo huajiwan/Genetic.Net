@@ -6,16 +6,45 @@ using System.Threading.Tasks;
 
 namespace Genetic.Chromosomes
 {
+    /// <summary>
+    /// Geen pool is a set of genes available for creating the chromosomes.
+    /// Each gene in the pool must be distinct.
+    /// </summary>
+    /// <typeparam name="T">Gene implementing type</typeparam>
     public class GenePool<T>
     {
-        public void AddRange(IEnumerable<T> p)
+        private List<T> genes = new List<T>();
+
+        public void AddRange(IEnumerable<T> geeneColection)
         {
-            throw new NotImplementedException();
+            foreach(var gene in geeneColection)
+            {
+                this.Add(gene);
+            }
         }
 
-        public void Add(T p)
+        public void Add(T gene)
         {
-            throw new NotImplementedException();
+            if (!this.genes.Contains(gene))
+            {
+                this.genes.Add(gene);
+            }
+        }
+
+        public int Count
+        {
+            get
+            {
+                return this.genes.Count;
+            }
+        }
+
+        public T this[int index]
+        {
+            get
+            {
+                return this.genes[index];
+            }
         }
     }
 }
