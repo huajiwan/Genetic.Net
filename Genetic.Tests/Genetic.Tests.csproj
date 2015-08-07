@@ -74,7 +74,6 @@
     <Folder Include="MigrationStrategies\" />
     <Folder Include="MutationStrategies\" />
     <Folder Include="PopulationStrategies\" />
-    <Folder Include="RandomNumberGenerators\" />
     <Folder Include="SelectionStrategies\" />
   </ItemGroup>
   <Choose>

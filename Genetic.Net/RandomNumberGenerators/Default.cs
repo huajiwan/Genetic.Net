@@ -8,9 +8,11 @@ namespace Genetic.RandomNumberGenerators
 {
     public class Default : IRandomNumberGenerator
     {
+        private Random random = new Random((int)DateTime.Now.Ticks);
+
         public double Next()
         {
-            throw new NotImplementedException();
+            return random.NextDouble();
         }
     }
 }
