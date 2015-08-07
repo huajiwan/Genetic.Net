@@ -48,11 +48,14 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Chromosomes\GenePoolTests.cs" />
     <Compile Include="EvolutionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -64,6 +67,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CrossoverStrategies\" />
+    <Folder Include="FitnessCalculators\" />
+    <Folder Include="MigrationStrategies\" />
+    <Folder Include="MutationStrategies\" />
+    <Folder Include="PopulationStrategies\" />
+    <Folder Include="RandomNumberGenerators\" />
+    <Folder Include="SelectionStrategies\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
